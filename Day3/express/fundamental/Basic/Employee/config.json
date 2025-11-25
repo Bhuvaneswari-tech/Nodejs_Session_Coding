@@ -1,0 +1,6 @@
+{
+    "port": 5500,
+    "authToken":"secrettoken123",
+    "corsOrigin":"http://localhost:3000",
+    "apiVersion":"v1"
+}
