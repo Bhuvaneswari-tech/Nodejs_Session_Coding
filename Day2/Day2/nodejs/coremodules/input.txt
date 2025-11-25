@@ -1,0 +1,6 @@
+Welcome to node js
+Working with node js is excellent
+Callback function
+Callback is an asynchronous equivalent for a function. A callback function is called
+at the compilation of a given task. Node makes heavy use of callbacks. All the APIs
+of Node are written in such a way that they support callbacks.  
