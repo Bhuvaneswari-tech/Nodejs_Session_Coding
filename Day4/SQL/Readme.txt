@@ -43,3 +43,7 @@ npm install express sequelize mysql2 dotenv cors helmet jsonwebtoken
 bcryptjs winston nodemon
 
 npm install --save-dev nodemon
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbmFnZXIiLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc2NDE1NTgzOSwiZXhwIjoxNzY0MTU5NDM5fQ.kSP8wUAD61USbJdvVJ5A63_9TC31xDDjsZy0EwpC4Nk"
+}
