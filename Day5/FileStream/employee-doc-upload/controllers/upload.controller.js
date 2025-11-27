@@ -1,39 +1,30 @@
-const fs = require("fs")
-const path = require('path')
+// controllers/upload.controller.js
+const fs = require('fs');
+const path = require('path');
 
-exports.uploadDocument = async(req,res)=>{
-    try{
-        //Finding the file from query
-        const fileName = req.query.name || 'uploaded_document'
+exports.uploadFile = (req, res) => {
+  const fileName = req.query.name;
 
-        //Destination path
-        const filePath = path.join(__dirname,'..','uploads',fileName)
+  if (!fileName) {
+    return res.status(400).json({ error: "File name is required in ?name=" });
+  }
 
-        //Create writeable Stream 
-        const writeSteam = fs.createWriteStream(filePath)
+  const filePath = path.join(__dirname, "../uploads", fileName);
 
-        //Pipe request stream -> file stream
-        res.pipe(writeSteam)
+  // Create a write stream
+  const writeStream = fs.createWriteStream(filePath);
 
-        //When upload finishes
-        writeSteam.on('finish',()=>{
-            res.status(200).json(
-                {
-                    message: 'File uploaded successfully (streamed)',
-                    file : fileName
-                }
-            )
-        })
+  req.pipe(writeStream);
 
-        //Catch file system error
-        writeSteam.on('error',(err)=>{
-            console.error('Write Error: ',err)
-            res.status(500).json({error: 'Upload failed'})
-        })
+  writeStream.on("finish", () => {
+    res.json({
+      message: "File uploaded successfully",
+      file: fileName,
+    });
+  });
 
-    }
-    catch(error){
-        console.error(error)
-        res.status(500).json({error: 'Server error'})
-    }
-}
+  writeStream.on("error", (err) => {
+    console.error("Stream Error:", err);
+    res.status(500).json({ error: "Stream processing failed" });
+  });
+};
